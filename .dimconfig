@@ -1,0 +1,8 @@
+#!perl
+# This file is managed by /Users/yoshimin/perl5/perlbrew/perls/perl-5.14.2/bin/dim.
+{
+  dist => 'Redisism',
+  distdir => 'Redisism',
+  module => 'Redisism',
+  template => 'Default'
+}
