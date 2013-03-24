@@ -34,8 +34,7 @@ sub expires_in { }
 
 sub define_command {
     my ($class, $cmd, $numarg, %options) = @_;
-    no strict 'refs';
-    *{$class . "::" . $cmd} = sub {
+    my $code = sub {
         my ($self, @args) = @_;
         my @cmdargs = $numarg ? splice(@args, 0, $numarg) : ();
         my $last_arg = $numarg ? pop @cmdargs : undef;
@@ -60,9 +59,13 @@ sub define_command {
             return $cmd_result;
         }
     };
+    no strict 'refs';
+    *{$class . "::" . $cmd} = $code;
     if ( $options{alias} ) {
         *{$class . "::" . $options{alias}} = *{$class . "::" . $cmd};
     }
+    use strict 'refs';
+    $code;
 }
 
 __PACKAGE__->define_command("del", 0,  writing => 1, alias => 'delete');
