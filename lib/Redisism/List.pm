@@ -6,23 +6,23 @@ use parent qw(Redisism::Base);
 
 our $VERSION = '0.01';
 
-# __PACKAGE__->define_command("blpop", 0, writing => 1);
-# __PACKAGE__->define_command("brpop", 0, writing => 1);
-# __PACKAGE__->define_command("brpoplpush", 1, writing => 1);
-__PACKAGE__->define_command("lindex", 1, alias => 'index');
-# __PACKAGE__->define_command("linsert", 1, alias => 'index');
-__PACKAGE__->define_command("llen", 0, alias => 'length');
-__PACKAGE__->define_command("lpop", 0, writing => 1, alias => 'shift');
-__PACKAGE__->define_command("lpush", 1, writing => 1, alias => 'unshift');
-__PACKAGE__->define_command("lpushx", 1, writing => 1, alias => 'unshiftx');
-__PACKAGE__->define_command("lrange", 2, alias => 'range');
-__PACKAGE__->define_command("lset", 2, writing => 1, alias => 'set');
-__PACKAGE__->define_command("lrem", 2, writing => 1, alias => 'remove');
-__PACKAGE__->define_command("ltrim", 2, writing => 1, alias => 'trim');
-__PACKAGE__->define_command("rpop", 0, writing => 1, alias => 'pop');
-# __PACKAGE__->define_command("rpoplpush", 1, writing => 1);
-__PACKAGE__->define_command("rpush", 1, writing => 1, alias => 'push');
-__PACKAGE__->define_command("rpushx", 1, writing => 1, alias => 'pushx');
+# __PACKAGE__->define_redis_command("blpop", 0, writing => 1);
+# __PACKAGE__->define_redis_command("brpop", 0, writing => 1);
+# __PACKAGE__->define_redis_command("brpoplpush", 1, writing => 1);
+__PACKAGE__->define_redis_command("lindex", 1, alias => 'index');
+# __PACKAGE__->define_redis_command("linsert", 1, alias => 'index');
+__PACKAGE__->define_redis_command("llen", 0, alias => 'length');
+__PACKAGE__->define_redis_command("lpop", 0, writing => 1, alias => 'shift');
+__PACKAGE__->define_redis_command("lpush", 1, writing => 1, alias => 'unshift');
+__PACKAGE__->define_redis_command("lpushx", 1, writing => 1, alias => 'unshiftx');
+__PACKAGE__->define_redis_command("lrange", 2, alias => 'range');
+__PACKAGE__->define_redis_command("lset", 2, writing => 1, alias => 'set');
+__PACKAGE__->define_redis_command("lrem", 2, writing => 1, alias => 'remove');
+__PACKAGE__->define_redis_command("ltrim", 2, writing => 1, alias => 'trim');
+__PACKAGE__->define_redis_command("rpop", 0, writing => 1, alias => 'pop');
+# __PACKAGE__->define_redis_command("rpoplpush", 1, writing => 1);
+__PACKAGE__->define_redis_command("rpush", 1, writing => 1, alias => 'push');
+__PACKAGE__->define_redis_command("rpushx", 1, writing => 1, alias => 'pushx');
 
 1;
 __END__

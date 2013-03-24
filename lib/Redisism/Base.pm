@@ -32,7 +32,7 @@ sub generate_key {
 # you should override this method if you handle non-parsistent key.
 sub expires_in { }
 
-sub define_command {
+sub define_redis_command {
     my ($class, $cmd, $numarg, %options) = @_;
     my $code = sub {
         my ($self, @args) = @_;
@@ -68,11 +68,11 @@ sub define_command {
     $code;
 }
 
-__PACKAGE__->define_command("del", 0,  writing => 1, alias => 'delete');
-__PACKAGE__->define_command("exists", 0, writing => 0);
-__PACKAGE__->define_command("type", 0, writing => 0);
-__PACKAGE__->define_command("ttl", 0, writing => 0);
-__PACKAGE__->define_command("dump", 0, writing => 0);
+__PACKAGE__->define_redis_command("del", 0,  writing => 1, alias => 'delete');
+__PACKAGE__->define_redis_command("exists", 0, writing => 0);
+__PACKAGE__->define_redis_command("type", 0, writing => 0);
+__PACKAGE__->define_redis_command("ttl", 0, writing => 0);
+__PACKAGE__->define_redis_command("dump", 0, writing => 0);
 
 1;
 __END__
@@ -118,7 +118,7 @@ Base class of other Reidisim classes. You should not inherit this class directly
 
 =head3 C<< expires_in() >>
 
-=head3 C<< define_command() >>
+=head3 C<< define_redis_command() >>
 
 =head3 C<< del(@generate_key_args) / delete(@generate_key_args) >>
 run L<del|http://redis.io/commands/del> command with generate_key(@generate_key_args).
@@ -151,11 +151,11 @@ L<perl>
 
 =head1 AUTHOR
 
-<<YOUR NAME HERE>> E<lt><<YOUR EMAIL ADDRESS HERE>>E<gt>
+Keiji Yoshimi E<lt>walf443 at gmail dot com E<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2013, <<YOUR NAME HERE>>. All rights reserved.
+Copyright (c) 2013, Keiji Yoshimi. All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
