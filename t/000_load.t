@@ -1,13 +1,8 @@
 #!perl -w
 use strict;
-use Test::More tests => 1;
+use Test::LoadAllModules;
 
 BEGIN {
-    use_ok 'Redisism';
-    use_ok 'Redisism::Base';
-    use_ok 'Redisism::List';
-    use_ok 'Redisism::Set';
-    use_ok 'Redisism::SortedSet';
+    all_uses_ok(search_path => 'Redisism');
 }
 
-diag "Testing Redisism/$Redisism::VERSION";

@@ -26,9 +26,10 @@ use inc::Module::Install;
 
 all_from 'lib/Redisism.pm';
 
-
 test_requires 'Test::More'     => '0.88';
 test_requires 'Test::Requires' => '0.06';
+test_requires 'Test::RedisServer' => 0;
+test_requires 'Test::LoadAllModules' => 0;
 
 auto_set_repository;
 

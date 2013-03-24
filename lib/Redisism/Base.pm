@@ -97,13 +97,13 @@ This document describes Redisism::Base version 0.01.
     $some_key = YourProj::Redisism::SomeKey->new(
         redis => $redis,
     );
-    $some_key->setex(1 => 1000); # setex your_proj:some_key:1 100 1000
+    $some_ky->setex(1 => 1000); # setex your_proj:some_key:1 100 1000
     $some_key->get(1) #=> 100; # get your_proj:some_key:1
     $some_key->delete(1); # del your_proj:some_key:1
 
 =head1 DESCRIPTION
 
-# TODO
+Base class of other Reidisim classes. You should not inherit this class directly.
 
 =head1 INTERFACE
 
@@ -117,7 +117,20 @@ This document describes Redisism::Base version 0.01.
 
 =head3 C<< define_command() >>
 
-# TODO
+=head3 C<< del(@generate_key_args) / delete(@generate_key_args) >>
+run L<del|http://redis.io/commands/del> command with generate_key(@generate_key_args).
+
+=head3 C<< exists(@generate_key_args) >>
+run L<exists|http://redis.io/commands/exists> command with generate_key(@generate_key_args).
+
+=head3 C<< type(@generate_key_args) >>
+run L<type|http://redis.io/commands/type> command with generate_key(@generate_key_args).
+
+=head3 C<< ttl() >>
+run L<ttl|http://redis.io/commands/ttl> command with generate_key(@generate_key_args).
+
+=head3 C<< dump() >>
+run L<dump|http://redis.io/commands/dump> command with generate_key(@generate_key_args).
 
 =head1 DEPENDENCIES
 

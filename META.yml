@@ -4,7 +4,9 @@ author:
   - '<<YOUR NAME HERE>> <<<YOUR EMAIL ADDRESS HERE>>>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
+  Test::LoadAllModules: 0
   Test::More: 0.88
+  Test::RedisServer: 0
   Test::Requires: 0.06
 configure_requires:
   ExtUtils::MakeMaker: 6.59
