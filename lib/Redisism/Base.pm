@@ -126,10 +126,10 @@ run L<exists|http://redis.io/commands/exists> command with generate_key(@generat
 =head3 C<< type(@generate_key_args) >>
 run L<type|http://redis.io/commands/type> command with generate_key(@generate_key_args).
 
-=head3 C<< ttl() >>
+=head3 C<< ttl(@generate_key_args) >>
 run L<ttl|http://redis.io/commands/ttl> command with generate_key(@generate_key_args).
 
-=head3 C<< dump() >>
+=head3 C<< dump(@generate_key_args) >>
 run L<dump|http://redis.io/commands/dump> command with generate_key(@generate_key_args).
 
 =head1 DEPENDENCIES
