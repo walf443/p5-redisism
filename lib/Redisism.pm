@@ -11,7 +11,7 @@ __END__
 
 =head1 NAME
 
-Redisism - Perl extention to do something
+Redisism - framework for Redis based application.
 
 =head1 VERSION
 
@@ -23,7 +23,13 @@ This document describes Redisism version 0.01.
 
 =head1 DESCRIPTION
 
-# TODO
+Redisism is for followings:
+ * key management
+ * restrict method for key's type.
+
+=head1 Key Management
+
+It's benefit for server operators that researching easy what kind of keys are exists and when kind of keys are expired in.
 
 =head1 INTERFACE
 

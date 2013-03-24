@@ -1,5 +1,5 @@
 ---
-abstract: 'Perl extention to do something'
+abstract: 'framework for Redis based application.'
 author:
   - '<<YOUR NAME HERE>> <<<YOUR EMAIL ADDRESS HERE>>>'
 build_requires:
@@ -26,4 +26,5 @@ requires:
   perl: 5.8.1
 resources:
   license: http://dev.perl.org/licenses/
+  repository: origin
 version: 0.01
