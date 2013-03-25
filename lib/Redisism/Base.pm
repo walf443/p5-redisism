@@ -14,7 +14,7 @@ sub get_redis {
     my ($self, @args) = @_;
     my $redis = $self->redis;
     if ( ref $redis eq 'CODE' ) {
-        return $redis->(@args);
+        return $redis->($self, @args);
     } else {
         return $redis;
     }
