@@ -1,0 +1,81 @@
+NAME
+    Redisism::Base - base class for application.
+
+VERSION
+    This document describes Redisism::Base version 0.01.
+
+SYNOPSIS
+        package YourProj::Redisism::SomeKey;
+        use parent qw(Redisism::Base);
+
+        sub expire_in { 100 }
+
+        1;
+
+        package main;
+
+        my $redis = RedisDB->new;
+        $some_key = YourProj::Redisism::SomeKey->new(
+            redis => $redis,
+        );
+        $some_ky->setex(1 => 1000); # setex your_proj:some_key:1 100 1000
+        $some_key->get(1) #=> 100; # get your_proj:some_key:1
+        $some_key->delete(1); # del your_proj:some_key:1
+
+DESCRIPTION
+    Base class of other Reidisim classes. You should not inherit this class
+    directly.
+
+INTERFACE
+  Functions
+    `generate_key(@args)'
+    generate a key for quering to redis. This method is called automatically
+    from wrapped method. I recommend you to override from subclass and
+    validate @args.
+
+    `base_key(@args)'
+    base_key is Redis's key which does not contain dynamic elements.
+    base_key does not contain key_prefix.
+
+    base_key is defined from a package name automatically (decamelized
+    relative package name). If you'd like to use your own rule, you can
+    override it from your subclass.
+
+    `get_redis(@args)'
+    RedisDB's instance or CodeRef. CodeRef take ($self, @args) and should be
+    return RedisDB's instance;
+
+    using CodeRef, you can choose redis connection by @args.
+
+    `expires_in()'
+    `define_redis_command()'
+    `del(@generate_key_args) / delete(@generate_key_args)'
+run del command with generate_key(@generate_key_args).
+    `exists(@generate_key_args)'
+run exists command with generate_key(@generate_key_args).
+    `type(@generate_key_args)'
+run type command with generate_key(@generate_key_args).
+    `ttl(@generate_key_args)'
+run ttl command with generate_key(@generate_key_args).
+    `dump(@generate_key_args)'
+run dump command with generate_key(@generate_key_args).
+DEPENDENCIES
+    Perl 5.8.1 or later.
+
+BUGS
+    All complex software has bugs lurking in it, and this module is no
+    exception. If you find a bug please either email me, or add the bug to
+    cpan-RT.
+
+SEE ALSO
+    perl
+
+AUTHOR
+    Keiji Yoshimi <walf443 at gmail dot com >
+
+LICENSE AND COPYRIGHT
+    Copyright (c) 2013, Keiji Yoshimi. All rights reserved.
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
