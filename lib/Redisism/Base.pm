@@ -133,12 +133,20 @@ Base class of other Reidisim classes. You should not inherit this class directly
 
 =head3 C<< generate_key(@args) >>
 
+generate a key for quering to redis. This method is called automatically from wrapped method.
+I recommend you to override from subclass and validate @args.
+
 =head3 C<< base_key(@args) >>
 
 base_key is Redis's key which does not contain dynamic elements. base_key does not contain key_prefix.
+
 base_key is defined from a package name automatically (decamelized relative package name). If you'd like to use your own rule, you can override it from your subclass.
 
 =head3 C<< get_redis(@args) >>
+
+RedisDB's instance or CodeRef. CodeRef take ($self, @args) and should be return RedisDB's instance;
+
+using CodeRef, you can choose redis connection by @args.
 
 =head3 C<< expires_in() >>
 
