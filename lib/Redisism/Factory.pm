@@ -2,6 +2,7 @@ package Redisism::Factory;
 use 5.008_001;
 use strict;
 use warnings;
+use Class::Load qw();
 our $VERSION = '0.01';
 
 use Class::Accessor::Lite (
@@ -14,8 +15,7 @@ sub create {
     my ($self, $class, %options) = @_;
 
     my $target = $class =~ /^\+(.+)$/ ? $1 : $self->namespace . "::" . $class;
-    eval { require $target }
-        or die $@;
+    Class::Load::load_class($target);
 
     unless ( $self->server_info ) {
         $self->server_info($self->redis->info("server"));

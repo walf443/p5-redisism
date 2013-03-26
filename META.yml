@@ -25,6 +25,7 @@ no_index:
     - t
     - xt
 requires:
+  Class::Load: 0
   perl: 5.8.1
 resources:
   license: http://dev.perl.org/licenses/
