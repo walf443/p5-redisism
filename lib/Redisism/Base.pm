@@ -34,7 +34,8 @@ sub base_key {
             my $full = ref($self);
             $self->{__namespace_regex} ||= qr{^$self->namespace::(.+)$};
             if ( $full =~ $self->{__namespace_regex} ) {
-                $self->{__base_key} = String::CamelCase::decamelize($1);
+                my $relative = $1;
+                $self->{__base_key} = join ':', map { String::CamelCase::decamelize($1) } split /::/, $relative;
             }
         } else {
             $self->{__base_key} = ref($self);
