@@ -25,6 +25,7 @@ sub create {
         redis => $self->redis,
         server_info => $self->server_info,
         key_prefix => $self->key_prefix,
+        namespace => $self->namespace,
         %options
     );
 }

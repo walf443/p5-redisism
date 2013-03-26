@@ -4,10 +4,11 @@ use strict;
 use warnings;
 our $VERSION = '0.01';
 use Carp qw();
+use String::CamelCase qw();
 
 use Class::Accessor::Lite (
     new => 1,
-    ro => [qw( key_prefix redis server_info )],
+    ro => [qw( redis key_prefix server_info namespace)],
 );
 
 sub get_redis {
@@ -22,7 +23,25 @@ sub get_redis {
 
 sub generate_key {
     my ($self, @args) = @_;
-    return ref($self) . ":" . join(":", @args);
+    return $self->base_key . ":" . join(":", @args);
+}
+
+sub base_key {
+    my ($self, ) = @_;
+
+    if ( !$self->{__base_key} ) {
+        if ( $self->namespace ) {
+            my $full = ref($self);
+            $self->{__namespace_regex} ||= qr{^$self->namespace::(.+)$};
+            if ( $full =~ $self->{__namespace_regex} ) {
+                $self->{__base_key} = String::CamelCase::decamelize($1);
+            }
+        } else {
+            $self->{__base_key} = ref($self);
+        }
+    }
+
+    return $self->{__base_key};
 }
 
 # you should override this method if you handle non-parsistent key.
@@ -112,6 +131,11 @@ Base class of other Reidisim classes. You should not inherit this class directly
 =head2 Functions
 
 =head3 C<< generate_key(@args) >>
+
+=head3 C<< base_key(@args) >>
+
+base_key is Redis's key which does not contain dynamic elements. base_key does not contain key_prefix.
+base_key is defined from a package name automatically (decamelized relative package name). If you'd like to use your own rule, you can override it from your subclass.
 
 =head3 C<< get_redis(@args) >>
 
