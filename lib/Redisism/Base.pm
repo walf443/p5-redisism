@@ -7,7 +7,7 @@ use Carp qw();
 
 use Class::Accessor::Lite (
     new => 1,
-    ro => [qw( namespace redis server_info )],
+    ro => [qw( key_prefix redis server_info )],
 );
 
 sub get_redis {
@@ -22,11 +22,7 @@ sub get_redis {
 
 sub generate_key {
     my ($self, @args) = @_;
-    if ( $self->namespace ) {
-        return $self->namespace . ":" . ref($self) . join(":", @args);
-    } else {
-        return ref($self) . ":" . join(":", @args);
-    }
+    return ref($self) . ":" . join(":", @args);
 }
 
 # you should override this method if you handle non-parsistent key.
@@ -39,6 +35,9 @@ sub define_redis_command {
         my @cmdargs = $numarg ? splice(@args, 0, $numarg) : ();
         my $last_arg = $numarg ? pop @cmdargs : undef;
         my $key = $self->generate_key(@args);
+        if ( $self->key_prefix ) {
+            $key = $self->key_prefix . ":" . $key;
+        }
         if ( defined($last_arg) ) {
             if ( ref $last_arg eq "ARRAY" ) {
                 push @cmdargs, @{ $last_arg };

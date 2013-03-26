@@ -7,7 +7,7 @@ our $VERSION = '0.01';
 
 use Class::Accessor::Lite (
     new => 1,
-    ro => [qw(redis namespace prefix)],
+    ro => [qw(redis namespace key_prefix)],
     rw => [qw(server_info)],
 );
 
@@ -24,7 +24,7 @@ sub create {
     return $target->new(
         redis => $self->redis,
         server_info => $self->server_info,
-        prefix => $self->prefix,
+        key_prefix => $self->key_prefix,
         %options
     );
 }
@@ -47,6 +47,7 @@ This document describes Redisism::Factory version 0.01.
     my $redis = RedisDB->new;
     my $factory = Redisism::Factory->new(
         redis => $redis,
+        key_prefix => 'your_proj',
         namespace => "YourProj::Redisism",
     );
     my $some_key = $factory->create("SomeKey"); #=> get instance of YourProj::Redisism::SomeKey with $redis
