@@ -29,10 +29,14 @@ subtest "test for id => 1" => sub {
     };
 
     subtest "sadd" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_set->sadd("test:1", id => 1), 1, "sadd OK");
+        is($test_set->add("test:2", id => 1), 1, "add OK");
+        is($test_set->add(["test:1", "test:2", "test:3", "test:4"], id => 1), 2, "multi item with duplicate OK");
+    };
+
+    subtest "scard" => sub {
+        is($test_set->scard(id => 1), 4, "scard OK");
+        is($test_set->length(id => 1), 4, "length OK");
     };
 
     subtest "sdiff" => sub {
@@ -60,16 +64,12 @@ subtest "test for id => 1" => sub {
         }
     };
     subtest "sismember" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_set->sismember("test:1", id => 1), 1, "sismember OK");
+        is($test_set->sismember("test:0", id => 1), 0, "sismember OK");
     };
     subtest "smembers" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        my $result = $test_set->smembers(id => 1);
+        is_deeply([sort @{ $result }], [qw(test:1 test:2 test:3 test:4)], "sismember OK");
     };
     subtest "smove" => sub {
         TODO: {

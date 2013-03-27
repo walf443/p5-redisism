@@ -6,14 +6,14 @@ use parent qw(Redisism::Base);
 
 our $VERSION = '0.01';
 
-__PACKAGE__->define_redis_command("sadd", 1, writing => 1);
-__PACKAGE__->define_redis_command("scard", 0, writing => 0);
+__PACKAGE__->define_redis_command("sadd", 1, writing => 1, alias => 'add');
+__PACKAGE__->define_redis_command("scard", 0, writing => 0, alias => 'length');
 # __PACKAGE__->define_redis_command("sdiff", 1, writing => 0);
 # __PACKAGE__->define_redis_command("sdiffstore", 1, writing => 1);
 # __PACKAGE__->define_redis_command("sinter", 1, writing => 0);
 # __PACKAGE__->define_redis_command("sinterstore", 1, writing => 1);
 __PACKAGE__->define_redis_command("sismember", 1, writing => 0);
-__PACKAGE__->define_redis_command("smembers", 1, writing => 0);
+__PACKAGE__->define_redis_command("smembers", 0, writing => 0);
 # __PACKAGE__->define_redis_command("smove", 1, writing => 1);
 __PACKAGE__->define_redis_command("spop", 0, writing => 1);
 __PACKAGE__->define_redis_command("srandmember", 1, writing => 0);
