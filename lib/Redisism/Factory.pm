@@ -81,11 +81,11 @@ L<perl>
 
 =head1 AUTHOR
 
-<<YOUR NAME HERE>> E<lt><<YOUR EMAIL ADDRESS HERE>>E<gt>
+Keiji Yoshimi E<lt>walf443 at gmail dot comE<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2013, <<YOUR NAME HERE>>. All rights reserved.
+Copyright (c) 2013, Keiji Yoshimi. All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

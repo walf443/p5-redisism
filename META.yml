@@ -1,7 +1,7 @@
 ---
 abstract: 'framework for Redis based application.'
 author:
-  - '<<YOUR NAME HERE>> <<<YOUR EMAIL ADDRESS HERE>>>'
+  - 'Keiji Yoshimi <walf443 at gmail dot com>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
   Test::LoadAllModules: 0
@@ -29,5 +29,5 @@ requires:
   perl: 5.8.1
 resources:
   license: http://dev.perl.org/licenses/
-  repository: origin
+  repository: git://github.com/walf443/p5-redisism.git
 version: 0.01
