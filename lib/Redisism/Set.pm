@@ -15,9 +15,9 @@ __PACKAGE__->define_redis_command("scard", 0, writing => 0, alias => 'length');
 __PACKAGE__->define_redis_command("sismember", 1, writing => 0);
 __PACKAGE__->define_redis_command("smembers", 0, writing => 0);
 # __PACKAGE__->define_redis_command("smove", 1, writing => 1);
-__PACKAGE__->define_redis_command("spop", 0, writing => 1);
-__PACKAGE__->define_redis_command("srandmember", 1, writing => 0);
-# __PACKAGE__->define_redis_command("srem", 1, writing => 1);
+__PACKAGE__->define_redis_command("spop", 0, writing => 1, alias => 'pop');
+__PACKAGE__->define_redis_command("srandmember", 1, writing => 0, alias => 'sample');
+__PACKAGE__->define_redis_command("srem", 1, writing => 1, alias => 'remove');
 # __PACKAGE__->define_redis_command("sunion", 1, writing => 0);
 # __PACKAGE__->define_redis_command("sunionstore", 1, writing => 1);
 

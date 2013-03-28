@@ -69,7 +69,7 @@ subtest "test for id => 1" => sub {
     };
     subtest "smembers" => sub {
         my $result = $test_set->smembers(id => 1);
-        is_deeply([sort @{ $result }], [qw(test:1 test:2 test:3 test:4)], "sismember OK");
+        is_deeply([sort @{ $result }], [qw(test:1 test:2 test:3 test:4)], "smembers OK");
     };
     subtest "smove" => sub {
         TODO: {
@@ -78,22 +78,31 @@ subtest "test for id => 1" => sub {
         }
     };
     subtest "spop" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        my $result = $test_set->spop(id => 1);
+        like($result, qr/test:\d/, "spop OK");
+        $result = $test_set->pop(id => 1);
+        like($result, qr/test:\d/, "pop OK");
+        is($test_set->length(id => 1), 2, "member is removed OK");
     };
     subtest "srandmember" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
+        my $results = $test_set->srandmember(1, id => 1);
+        is(@{$results}, 1, "length OK");
+        for my $res ( @$results ) {
+            like($res , qr/test:\d/, "srandmember OK");
         }
+
+        $results = $test_set->sample(2, id => 1);
+        is(@{$results}, 2, "length OK");
+        for my $res ( @$results ) {
+            like($res , qr/test:\d/, "sample OK");
+        }
+        is($test_set->length(id => 1), 2, "member is not removed OK");
     };
     subtest "srem" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        $test_set->sadd("test:1", id => 1);
+        is($test_set->srem("test:1", id => 1), 1, "srem OK");
+        $test_set->sadd("test:1", id => 1);
+        is($test_set->remove("test:1", id => 1), 1, "remove OK");
     };
     subtest "sunion" => sub {
         TODO: {
