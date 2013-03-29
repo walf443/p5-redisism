@@ -29,31 +29,21 @@ subtest "test for id => 1" => sub {
     };
 
     subtest "zadd" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zadd(10, "test:1", id => 1), 1, "zadd OK");
+        is($test_zset->add(20, "test:2", id => 1), 1, "add OK");
     };
 
     subtest "zcard" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zcard(id => 1), 2, "zcard OK");
+        is($test_zset->length(id => 1), 2, "length OK");
     };
 
     subtest "zcount" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zcount(11, 21, id => 1), 1, "zcount OK");
     };
 
     subtest "zincrby" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zincrby(5, "test:1", id => 1), 15, "zincrby OK");
     };
     subtest "zinterstore" => sub {
         TODO: {
@@ -62,16 +52,12 @@ subtest "test for id => 1" => sub {
         }
     };
     subtest "zrange" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is_deeply($test_zset->zrange(0, 1, undef, id => 1), ["test:1", "test:2"], "zrange without score OK");
+        is_deeply($test_zset->zrange(0, 1, "withscores", id => 1), ["test:1" => 15, "test:2" => 20], "zrange with score OK");
     };
     subtest "zrank" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zrank("test:1", id => 1), 0, "zrank OK");
+        is($test_zset->rank("test:2", id => 1), 1, "zrank OK");
     };
     subtest "zrem" => sub {
         TODO: {

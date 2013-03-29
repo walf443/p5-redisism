@@ -6,13 +6,13 @@ use parent qw(Redisism::Base);
 
 our $VERSION = '0.01';
 
-__PACKAGE__->define_redis_command('zadd', 1, writing => 1);
-__PACKAGE__->define_redis_command('zcard', 0, writing => 1);
+__PACKAGE__->define_redis_command('zadd', 2, writing => 1, alias => 'add');
+__PACKAGE__->define_redis_command('zcard', 0, writing => 1, alias => 'length');
 __PACKAGE__->define_redis_command('zcount', 2, writing => 1);
 __PACKAGE__->define_redis_command('zincrby', 2, writing => 1);
 # __PACKAGE__->define_redis_command('zinterstore', 2, writing => 1);
 __PACKAGE__->define_redis_command('zrange', 3, writing => 1);
-__PACKAGE__->define_redis_command('zrank', 1, writing => 1);
+__PACKAGE__->define_redis_command('zrank', 1, writing => 1, alias => 'rank');
 __PACKAGE__->define_redis_command('zrem', 1, writing => 1);
 __PACKAGE__->define_redis_command('zremrangebyrank', 2, writing => 1);
 __PACKAGE__->define_redis_command('zremrangebyscore', 2, writing => 1);
