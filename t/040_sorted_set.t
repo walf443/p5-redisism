@@ -59,27 +59,9 @@ subtest "test for id => 1" => sub {
         is($test_zset->zrank("test:1", id => 1), 0, "zrank OK");
         is($test_zset->rank("test:2", id => 1), 1, "zrank OK");
     };
-    subtest "zrem" => sub {
-        is($test_zset->zrem("test:1", id => 1), 1, "zrem OK");
-        is($test_zset->remove(["test:1"], id => 1), 0, "zrem OK");
-    };
-    subtest "zremrangebyrank" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
-    };
-    subtest "zremrangebyscore" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
-    };
     subtest "zrevrange" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is_deeply($test_zset->zrevrange(0, 2, undef, id => 1), ["test:2", "test:1"], "zrevrange without scores OK");
+        is_deeply($test_zset->zrevrange(0, 2, "withscores", id => 1), ["test:2", 20, "test:1", 15], "zrevrange with scores OK");
     };
     subtest "zrevrangebyscore" => sub {
         TODO: {
@@ -94,6 +76,22 @@ subtest "test for id => 1" => sub {
         }
     };
     subtest "zscore" => sub {
+        TODO: {
+            local $TODO = "not implemented";
+            fail("not implemented");
+        }
+    };
+    subtest "zrem" => sub {
+        is($test_zset->zrem("test:1", id => 1), 1, "zrem OK");
+        is($test_zset->remove(["test:1"], id => 1), 0, "zrem OK");
+    };
+    subtest "zremrangebyrank" => sub {
+        TODO: {
+            local $TODO = "not implemented";
+            fail("not implemented");
+        }
+    };
+    subtest "zremrangebyscore" => sub {
         TODO: {
             local $TODO = "not implemented";
             fail("not implemented");
