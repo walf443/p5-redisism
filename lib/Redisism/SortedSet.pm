@@ -13,7 +13,7 @@ __PACKAGE__->define_redis_command('zincrby', 2, writing => 1);
 # __PACKAGE__->define_redis_command('zinterstore', 2, writing => 1);
 __PACKAGE__->define_redis_command('zrange', 3, writing => 1);
 __PACKAGE__->define_redis_command('zrank', 1, writing => 1, alias => 'rank');
-__PACKAGE__->define_redis_command('zrem', 1, writing => 1);
+__PACKAGE__->define_redis_command('zrem', 1, writing => 1, alias => 'remove');
 __PACKAGE__->define_redis_command('zremrangebyrank', 2, writing => 1);
 __PACKAGE__->define_redis_command('zremrangebyscore', 2, writing => 1);
 __PACKAGE__->define_redis_command('zrevrange', 3, writing => 1);

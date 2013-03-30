@@ -60,10 +60,8 @@ subtest "test for id => 1" => sub {
         is($test_zset->rank("test:2", id => 1), 1, "zrank OK");
     };
     subtest "zrem" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zrem("test:1", id => 1), 1, "zrem OK");
+        is($test_zset->remove(["test:1"], id => 1), 0, "zrem OK");
     };
     subtest "zremrangebyrank" => sub {
         TODO: {
