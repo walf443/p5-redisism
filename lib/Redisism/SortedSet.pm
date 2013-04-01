@@ -20,7 +20,7 @@ __PACKAGE__->define_redis_command('zremrangebyrank', 2, writing => 1);
 __PACKAGE__->define_redis_command('zrevrange', 3, writing => 0);
 # __PACKAGE__->define_redis_command('zrevrangebyscore', 3, writing => 0);
 __PACKAGE__->define_redis_command('zrevrank', 1, writing => 0);
-__PACKAGE__->define_redis_command('zscore', 1, writing => 0);
+__PACKAGE__->define_redis_command('zscore', 1, writing => 0, alias => 'score');
 # __PACKAGE__->define_redis_command('zunionstore', 3, writing => 1);
 
 sub order_by {

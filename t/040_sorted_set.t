@@ -82,10 +82,8 @@ subtest "test for id => 1" => sub {
         }
     };
     subtest "zscore" => sub {
-        TODO: {
-            local $TODO = "not implemented";
-            fail("not implemented");
-        }
+        is($test_zset->zscore("test:1", id => 1), 15, "zscore OK");
+        is($test_zset->score("test:2", id => 1), 20, "score OK");
     };
     subtest "zrem" => sub {
         is($test_zset->zrem("test:1", id => 1), 1, "zrem OK");
