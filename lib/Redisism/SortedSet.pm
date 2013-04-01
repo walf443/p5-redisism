@@ -7,20 +7,45 @@ use parent qw(Redisism::Base);
 our $VERSION = '0.01';
 
 __PACKAGE__->define_redis_command('zadd', 2, writing => 1, alias => 'add');
-__PACKAGE__->define_redis_command('zcard', 0, writing => 1, alias => 'length');
-__PACKAGE__->define_redis_command('zcount', 2, writing => 1);
+__PACKAGE__->define_redis_command('zcard', 0, writing => 0, alias => 'length');
+__PACKAGE__->define_redis_command('zcount', 2, writing => 0);
 __PACKAGE__->define_redis_command('zincrby', 2, writing => 1);
 # __PACKAGE__->define_redis_command('zinterstore', 2, writing => 1);
-__PACKAGE__->define_redis_command('zrange', 3, writing => 1);
-__PACKAGE__->define_redis_command('zrank', 1, writing => 1, alias => 'rank');
+__PACKAGE__->define_redis_command('zrange', 3, writing => 0);
+# __PACKAGE__->define_redis_command('zrevrangebyscore', 3, writing => 0);
+__PACKAGE__->define_redis_command('zrank', 1, writing => 0);
 __PACKAGE__->define_redis_command('zrem', 1, writing => 1, alias => 'remove');
 __PACKAGE__->define_redis_command('zremrangebyrank', 2, writing => 1);
 # __PACKAGE__->define_redis_command('zremrangebyscore', 2, writing => 1);
-__PACKAGE__->define_redis_command('zrevrange', 3, writing => 1);
-__PACKAGE__->define_redis_command('zrevrangebyscore', 3, writing => 1);
-__PACKAGE__->define_redis_command('zrevrank', 1, writing => 1);
-__PACKAGE__->define_redis_command('zscore', 1, writing => 1);
+__PACKAGE__->define_redis_command('zrevrange', 3, writing => 0);
+# __PACKAGE__->define_redis_command('zrevrangebyscore', 3, writing => 0);
+__PACKAGE__->define_redis_command('zrevrank', 1, writing => 0);
+__PACKAGE__->define_redis_command('zscore', 1, writing => 0);
 # __PACKAGE__->define_redis_command('zunionstore', 3, writing => 1);
+
+sub order_by {
+    'DESC';
+}
+
+sub rank {
+    my $class = shift;
+
+    if ( $class->order_by eq 'ASC' ) {
+        return $class->zrank(@_);
+    } else {
+        return $class->zrevrank(@_);
+    }
+}
+
+sub range {
+    my $class = shift;
+
+    if ( $class->order_by eq 'ASC' ) {
+        return $class->zrange(@_);
+    } else {
+        return $class->zrevrange(@_);
+    }
+}
 
 1;
 __END__
@@ -35,7 +60,19 @@ This document describes Redisism::SortedSet version 0.01.
 
 =head1 SYNOPSIS
 
-    use Redisism::SortedSet;
+    package YourProj::Redisism::SomeRanking;
+    use parent qw(Redisism::SortedSet);
+
+    sub order_by { 'DESC' } # 'DESC' OR 'ASC' ( DESC is default )
+
+    package main;
+
+    my $some_ranking = YourProj::Redisism::SomeRanking->new(
+        redis => $redis
+        namespace => 'YourProj::Redisism',
+        key_prefix => 't',
+    );
+    $some_ranking->rank("test:1", id => 1); # zrevrank t:some_ranking:id:1 test:1
 
 =head1 DESCRIPTION
 
@@ -45,9 +82,19 @@ This document describes Redisism::SortedSet version 0.01.
 
 =head2 Functions
 
-=head3 C<< hello() >>
+=head3 C<< order_by() >>
 
-# TODO
+rank() / range() consider order_by. ("DESC" or "ASC". default is "DESC")
+
+=head3 C<< rank() >>
+
+if order_by() return "DESC", It's alias of zrevrank.
+if order_by() return "ASC", It's alias of zrank.
+
+=head3 C<< range() >>
+
+if order_by() return "DESC", It's alias of zrevrange.
+if order_by() return "ASC", It's alias of zrange.
 
 =head1 DEPENDENCIES
 
