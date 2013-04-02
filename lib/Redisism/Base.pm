@@ -23,7 +23,14 @@ sub get_redis {
 
 sub generate_key {
     my ($self, @args) = @_;
-    return $self->base_key . ":" . join(":", @args);
+    if ( $self->is_static_key ) {
+        if (@args > 0) {
+            Carp::croak(ref $self . " key does not take arguments");
+        }
+        return $self->base_key;
+    } else {
+        return $self->base_key . ":" . join(":", @args);
+    }
 }
 
 sub base_key {
@@ -45,8 +52,9 @@ sub base_key {
     return $self->{__base_key};
 }
 
-# you should override this method if you handle non-parsistent key.
 sub expires_in { }
+
+sub is_static_key {}
 
 sub define_redis_command {
     my ($class, $cmd, $numarg, %options) = @_;
@@ -149,6 +157,10 @@ RedisDB's instance or CodeRef. CodeRef take ($self, @args) and should be return 
 using CodeRef, you can choose redis connection by @args.
 
 =head3 C<< expires_in() >>
+you should override this method if you handle non-parsistent key.
+
+=head3 C<< is_static_key() >>
+you should override this method and return true value if key does not take any parameters.
 
 =head3 C<< define_redis_command() >>
 
