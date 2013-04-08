@@ -6,8 +6,8 @@ use parent qw(Redisism::Base);
 
 our $VERSION = '0.01';
 
-__PACKAGE__->define_redis_command("hdel", 1, writing => 1, alias => 'remove_field');
-__PACKAGE__->define_redis_command("hexists", 0, writing => 0);
+__PACKAGE__->define_redis_command("hdel", 1, writing => 1, alias => 'remove_fields');
+__PACKAGE__->define_redis_command("hexists", 1, writing => 0);
 __PACKAGE__->define_redis_command("hget", 1, writing => 0, alias => 'get_field');
 __PACKAGE__->define_redis_command("hgetall", 0, writing => 0, alias => 'get_all');
 __PACKAGE__->define_redis_command("hincrby", 2, writing => 1);
