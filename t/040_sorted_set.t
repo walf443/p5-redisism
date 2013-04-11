@@ -7,18 +7,11 @@ package main;
 use strict;
 use warnings;
 use Test::More;
-use Test::RedisServer;
-use RedisDB;
+use t::Util;
 
-my $server;
-eval {
-    $server = Test::RedisServer->new;
-}
-    or plan skip_all => 'redis-server is required for this test';
+my $server = t::Util->start_redis_server;
+my $redis = t::Util->get_redis_client_for($server);
 
-my %conn = $server->connect_info;
-
-my $redis = RedisDB->new(path => $conn{sock});
 my $test_zset = t::Redisism::TestSortedSet->new(
     redis => $redis,
 );

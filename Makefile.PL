@@ -35,7 +35,13 @@ test_requires 'Test::LoadAllModules' => 0;
 
 auto_set_repository;
 
-tests_recursive;
+# tests_recursive;
+
+test_target test_redis_db => (
+    env => { REDIS_CLIENT => 'RedisDB' },
+    alias_for_author => 'test',
+);
+
 author_tests 'xt';
 
 
