@@ -24,3 +24,9 @@ cover_db*
 *.gcno
 *.gcov
 *.stackdump
+/Redisism-*
+/.build
+/_build_params
+/Build
+!Build/
+!META.json

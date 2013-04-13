@@ -37,14 +37,14 @@ This document describes Redisism::List version 0.01.
 
 =head1 SYNOPSIS
 
-    package YourProj::Redisism::HotEntry
+    package YourProj::Redisism::HotEntry;
     use parent qw(Redisism::List);
 
     1;
 
     my $redis = RedisDB->new;
     my $r_hot_entry = YourProj::Redisism::NewEntry->new(
-        redis => $hot_entry,
+        redis => $redis,
     );
     $r_hot_entry->lpush("item");
     my $new_item = $r_hot_entry->rpop();
