@@ -35,6 +35,8 @@
       "develop" : {
          "requires" : {
             "Pod::Wordlist::hanekomu" : "0",
+            "Redis" : "0",
+            "RedisDB" : "0",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion" : "0.10108",
             "Test::Pod" : "1.41",
@@ -42,13 +44,26 @@
          }
       },
       "runtime" : {
+         "recommends" : {
+            "Redis" : "0",
+            "RedisDB" : "0"
+         },
          "requires" : {
+            "Class::Accessor::Lite" : "0",
+            "Class::Load" : "0",
+            "String::CamelCase" : "0",
+            "parent" : "0",
             "perl" : "5.008001"
          }
       },
       "test" : {
+         "recommends" : {
+            "Redis" : "0",
+            "RedisDB" : "0"
+         },
          "requires" : {
-            "Test::More" : "0.98"
+            "Test::More" : "0.98",
+            "Test::RedisServer" : "0"
          }
       }
    },
