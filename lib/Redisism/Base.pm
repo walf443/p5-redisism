@@ -124,11 +124,11 @@ This document describes Redisism::Base version 0.01.
     package main;
 
     my $redis = RedisDB->new;
-    $some_key = YourProj::Redisism::SomeKey->new(
+    my $some_key = YourProj::Redisism::SomeKey->new(
         redis => $redis,
     );
-    $some_ky->setex(1 => 1000); # setex your_proj:some_key:1 100 1000
-    $some_key->get(1) #=> 100; # get your_proj:some_key:1
+    $some_key->setex(1 => 1000); # setex your_proj:some_key:1 100 1000
+    $some_key->get(1); #=> 1000 # get your_proj:some_key:1
     $some_key->delete(1); # del your_proj:some_key:1
 
 =head1 DESCRIPTION

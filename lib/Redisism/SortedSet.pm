@@ -67,8 +67,9 @@ This document describes Redisism::SortedSet version 0.01.
 
     package main;
 
+    my $redis = RedisDB->new;
     my $some_ranking = YourProj::Redisism::SomeRanking->new(
-        redis => $redis
+        redis => $redis,
         namespace => 'YourProj::Redisism',
         key_prefix => 't',
     );
