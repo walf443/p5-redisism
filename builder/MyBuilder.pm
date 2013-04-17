@@ -13,6 +13,7 @@ sub ACTION_test_with_redis {
     my $self = shift;
 
     print qq{Testing: \$ENV{REDIS_CLIENT} = "Redis"\n};
+    local $ENV{REDIS_CLIENT} = "Redis";
     $self->SUPER::ACTION_test;
 }
 
